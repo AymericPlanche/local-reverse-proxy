@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    command: --docker --docker.domain=${LOCAL_DOMAIN} --logLevel=ERROR --acme.email=${LETS_ENCRYPT_EMAIL}
+    ports:
+      - "443:443"
+    volumes:
+      - ./traefik-https.toml:/traefik.toml:ro
+      - ./acme.json:/acme.json
