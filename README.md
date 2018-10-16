@@ -1,8 +1,8 @@
-# Traefik
-
-Traefik is a reverse proxy.
+# Local reverse proxy
 
 In a docker development environment it's usefull in order to access to web containers with a complete url instead of playing with port number (http://my-domain.docker.local vs http://localhost:8123)
+
+As a reverse proxy, we use the traefik docker image.
 
 It will listen to default http port number (80) so if you have a container already on this port or a local web server please, update your container configuration and/or stop your local webserver.
 
@@ -14,7 +14,7 @@ It will listen to default http port number (80) so if you have a container alrea
 
 ## Copy the env-dist into a .env file
 
-`$/workspace/traefik: cp env-dist .env`
+`$/workspace/local-reverse-proxy: cp env-dist .env`
 
 # Edit /etc/hosts and docker-compose.yml
 
@@ -54,7 +54,7 @@ networks:
 
 # Launch traefik service
 
-`$/workspace/traefik: docker-compose up -d`
+`$/workspace/local-reverse-proxy: docker-compose up -d`
 
 
 # HTTPS
@@ -64,9 +64,9 @@ Traefik comes with the https support using https://letsencrypt.org/ service.
 Here are the three steps configuration:
 
 - Provide your email in the `.env` file
-- Create an `acme.json` file with low rights `$/workspace/traefik: touch acme.json && chmod 600 acme.json`
+- Create an `acme.json` file with low rights `$/workspace/local-reverse-proxy: touch acme.json && chmod 600 acme.json`
 - Launch traefik container with the good configuration.
 
-`$/workspace/traefik: docker-compose -f docker-composer.yml -f docker-compose.https.yml up -d`
+`$/workspace/local-reverse-proxy: docker-compose -f docker-composer.yml -f docker-compose.https.yml up -d`
 
 More information about https with traefik here https://docs.traefik.io/user-guide/docker-and-lets-encrypt/
