@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  reverse-proxy:
+  traefik:
     command: --docker --docker.domain=${LOCAL_DOMAIN} --logLevel=ERROR --acme.email=${LETS_ENCRYPT_EMAIL}
     ports:
       - "443:443"
