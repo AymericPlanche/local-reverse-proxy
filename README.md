@@ -6,17 +6,17 @@ As a reverse proxy, we use the traefik docker image.
 
 It will listen to default http port number (80) so if you have a container already on this port or a local web server please, update your container configuration and/or stop your local webserver.
 
-# Prerequisites
+## Prerequisites
 
-## Create a docker network to let communicate the reverse proxy with the containers in the docker land
+### Create a docker network to let communicate the reverse proxy with the containers in the docker land
 
 `docker network create proxy`
 
-## Copy the env-dist into a .env file
+### Copy the env-dist into a .env file
 
 `$/workspace/local-reverse-proxy: cp env-dist .env`
 
-# Edit /etc/hosts and docker-compose.yml
+## Edit /etc/hosts and docker-compose.yml
 
 Assuming we want all our domain with the following pattern `*.docker.local` (you could set the value of your choice in `.env` file)
 
@@ -24,9 +24,9 @@ Assuming we want all our domain with the following pattern `*.docker.local` (you
 
 `echo "127.0.0.1    my-domain.docker.local" >> /etc/hosts`
 
-## Each domain must be affected to a container. Edit the docker-compose.yml file (or create a docker-compose.override.yml file instead)
+### Each domain must be affected to a container. Edit the docker-compose.yml file (or create a docker-compose.override.yml file instead)
 
-### Add the traefik labels and the proxy network on the container
+#### Add the traefik labels and the proxy network on the container
 Example:
 ```
   httpd:
@@ -40,7 +40,7 @@ Example:
       - "traefik.enable=true"
 ```
 
-### Add the network configuration at the end of the docker-compose.yml file
+#### Add the network configuration at the end of the docker-compose.yml file
 
 ```
 networks:
@@ -48,16 +48,16 @@ networks:
         external: true
 ```
 
-### Restart you docker compose configuration
+#### Restart you docker compose configuration
 
 `$/workspace/myProject: docker-compose up -d`
 
-# Launch traefik service
+## Launch traefik service
 
 `$/workspace/local-reverse-proxy: docker-compose up -d`
 
 
-# HTTPS
+## HTTPS
 
 Traefik comes with the https support using https://letsencrypt.org/ service.
 
