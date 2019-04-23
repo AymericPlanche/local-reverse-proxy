@@ -70,3 +70,10 @@ Here are the three steps configuration:
 `$/workspace/local-reverse-proxy: docker-compose -f docker-composer.yml -f docker-compose.https.yml up -d`
 
 More information about https with traefik here https://docs.traefik.io/user-guide/docker-and-lets-encrypt/
+<<<<<<< HEAD
+=======
+
+### Pro-tip: Retrieve all the domain of a docker-compose
+
+`cat docker-compose.override.yml | grep "Host:" | sed "s/.*Host:/127\.0\.0\.1\t/g" | sed 's/"//g'`
+>>>>>>> add pro tip
